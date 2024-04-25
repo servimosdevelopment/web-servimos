@@ -52,22 +52,11 @@
       </div>
       <div class="modal-body">
         <form id="updateUserForm" name="updateUserForm">
-          <div class="form-group">
-            <label for="label-control">ID:</label>
-            <input type="number" class="form-control" name="idUpdate" id="idUpdate" disabled>
-          </div>
+        <input type="hidden" name="id" id="id" value="">
           <div class="form-group">
             <label for="label-control">Nombres y apellidos:</label>
             <input type="text" class="form-control" name="nombreUpdate" id="nombreUpdate" >
           </div>
-          <!--<div class="form-group">
-            <label for="label-control">Email</label>
-            <input type="email" pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$" class="form-control" name="emailUpdate" id="emailUpdate">
-          </div>
-          <div class="form-group">
-            <label for="label-control">Contraseña:</label>
-            <input type="password" class="form-control" name="passwordUpdate" id="passwordUpdate">
-          </div>-->
           <div class="form-group">
             <label for="listRolUpdate">Rol:</label>
             <select class="form-control" name="listRolUpdate" id="listRolUpdate">

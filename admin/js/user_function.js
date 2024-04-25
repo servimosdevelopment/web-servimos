@@ -98,8 +98,6 @@ document.addEventListener('DOMContentLoaded',function(){
         e.preventDefault();
         
         var nombreUpdate= document.querySelector('#nombreUpdate').value;
-        //var emailUpdate= document.querySelector('#emailUpdate').value;
-        //var password= document.querySelector('#passwordUpdate').value;
         var listRolUpdate= document.querySelector('#listRolUpdate').value;
         var listEstadoUpdate= document.querySelector('#listEstadoUpdate').value;
         console.log(nombreUpdate, listRolUpdate, listEstadoUpdate)
@@ -154,7 +152,7 @@ function readUserUpdate(id){
         if(request.readyState == 4 && request.status == 200){
             var data = JSON.parse(request.responseText);
             if(data.status){
-                document.querySelector('#idUpdate').value= data.datos.id;
+                document.querySelector('#id').value= data.datos.id;
                 document.querySelector('#nombreUpdate').value= data.datos.nombre;
                 //document.querySelector('#emailUpdate').value= data.datos.email;
                 //document.querySelector('#passwordUpdate').value= data.datos.password;
@@ -167,43 +165,6 @@ function readUserUpdate(id){
         }
     }
 }
-
-/*function deleteUser(id){
-    var idUser = id;
-    swal({
-        title: "Eliminar",
-        text: "¿Desea Eliminar al Usuario seleccionado?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Aceptar",
-        cancelButtonText: "Cancelar",
-        closeOnconfirm: false,
-        closeOnCancel: true
-    }, function(confirm){
-        if(confirm){
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var url = './modelos/usuarios/deleteUser.php?id=' + encodeURIComponent(idUser);
-            request.open('POST', url, true);
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send(); 
-            request.onreadystatechange = function(){
-                if(request.readyState == 4){
-                    if(request.status == 200){
-                        var data = JSON.parse(request.responseText);
-                        if(data.status){
-                           swal('Usuario', data.msg, 'success');
-                           userstable.ajax.reload();
-                        } else {
-                            swal('Error', data.msg, 'error');
-                        }
-                    } else {
-                        swal('Error', 'Error en la solicitud al servidor', 'error');
-                    }
-                }
-            }    
-        }
-    });
-}*/
 
 function deleteUser(id){
     var idUser = id;
@@ -243,8 +204,10 @@ function deleteUser(id){
     });
 }
 
-
-
 function openModal() {
     $("#userModal").modal('show');
 }
+
+
+
+
