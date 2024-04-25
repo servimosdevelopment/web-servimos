@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 
     var userForm = document.querySelector('#userForm');
-    userForm.onsubmit= function(e){
+    userForm.onsubmit = function(e){
         e.preventDefault();
 
         var nombre= document.querySelector('#nombre').value;
@@ -92,6 +92,55 @@ document.addEventListener('DOMContentLoaded',function(){
         };
         
     }
+
+    var updateUserForm = document.querySelector('#updateUserForm');
+    updateUserForm.onsubmit = function(e){
+        e.preventDefault();
+        
+        var nombreUpdate= document.querySelector('#nombreUpdate').value;
+        //var emailUpdate= document.querySelector('#emailUpdate').value;
+        //var password= document.querySelector('#passwordUpdate').value;
+        var listRolUpdate= document.querySelector('#listRolUpdate').value;
+        var listEstadoUpdate= document.querySelector('#listEstadoUpdate').value;
+        console.log(nombreUpdate, listRolUpdate, listEstadoUpdate)
+        if (!nombreUpdate || !listRolUpdate || !listEstadoUpdate) {
+            swal('Alerta', 'Por favor complete todos los campos', 'error');
+            return false;
+        }
+        
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var url='./modelos/usuarios/updateUser.php';
+        var formUpdate = new FormData(updateUserForm);
+        formUpdate.append('listRolUpdate', listRolUpdate);
+        formUpdate.append('listEstadoUpdate', listEstadoUpdate);
+        request.open('POST',url,true);
+        request.send(formUpdate);
+        request.onreadystatechange = function() {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    var dataUpdate = JSON.parse(request.responseText);
+                    try {
+                        
+                        if (dataUpdate.status) {
+                            $("#updateUserModal").modal('hide');
+                            updateUserForm.reset();
+                            swal('Usuario', dataUpdate.msg, 'success');
+                            userstable.ajax.reload();
+                        } else {
+                            swal('Error', dataUpdate.msg, 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error al analizar la respuesta JSON:', error);
+                        
+                    }
+                } else {
+                    console.error('Error en la solicitud AJAX:', request.status);
+                }
+            }
+        };
+        
+    }
 })
 
 function readUserUpdate(id){
@@ -105,11 +154,10 @@ function readUserUpdate(id){
         if(request.readyState == 4 && request.status == 200){
             var data = JSON.parse(request.responseText);
             if(data.status){
-                console.log(data.datos.nombre);
                 document.querySelector('#idUpdate').value= data.datos.id;
                 document.querySelector('#nombreUpdate').value= data.datos.nombre;
-                document.querySelector('#emailUpdate').value= data.datos.email;
-                ///document.querySelector('#passwordUpdate').value= data.datos.password;
+                //document.querySelector('#emailUpdate').value= data.datos.email;
+                //document.querySelector('#passwordUpdate').value= data.datos.password;
                 document.querySelector('#listRolUpdate').value= data.datos.rol;
                 document.querySelector('#listEstadoUpdate').value= data.datos.activo;
                 $("#updateUserModal").modal('show');

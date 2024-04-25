@@ -1,29 +1,7 @@
 $('#tableprofesores').DataTable();
 var tableprofesores;
 
-document.addEventListener('DOMContentLoaded',function(){
-    tableprofesores = $('#tableprofesores').DataTable({
-      "aProcessing": true,
-      "aServerSide": true,
-      "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-      },
-      "ajax": {
-          "url": "./modelos/profesores/tabla_profesores.php",
-          "dataSrc":""
-      },
-      "columns": [
-         
-          {"data":"idprofesor"},
-          {"data":"nom_profesor"},
-          {"data":"aprofesor"},
-          {"data":"acciones"}
-      ],
-      "responsive": true,
-      "bDestroy": true,
-      "iDisplayLength": 10,
-      "order": [[0,"asc"]]
-    });
+3
 
     var formprofesor = document.querySelector('#formprofesor');
     formprofesor.onsubmit= function(e){
