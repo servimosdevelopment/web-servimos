@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
       "aProcessing": true,
       "aServerSide": true,
       "language": {
-          "url": "//cdn.datatables.net/plug-ins/2.0.5/i18n/es-CO.json"
+          "url": "https://cdn.datatables.net/plug-ins/2.0.5/i18n/es-CO.json"
       },
       "ajax": {
           "url": "./modelos/usuarios/userstable.php",
