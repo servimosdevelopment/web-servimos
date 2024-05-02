@@ -9,5 +9,6 @@
     <script type="text/javascript" src="../js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../js/plugins/dataTables.bootstrap.min.js"></script>
     <script src="js/user_function.js"></script>
+    <script src="js/person_function.js"></script>
   </body>
 </html>

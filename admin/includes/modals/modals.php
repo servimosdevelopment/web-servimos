@@ -12,7 +12,7 @@
         <form id="userForm" name="userForm">
           <div class="form-group">
             <label for="label-control">Nombres y apellidos:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" >
+            <input type="text" class="form-control" name="nombre" id="nombre">
           </div>
           <div class="form-group">
             <label for="label-control">Email</label>
@@ -25,14 +25,14 @@
           <div class="form-group">
             <label for="listRol">Rol:</label>
             <select class="form-control" name="listRol" id="listRol">
-                <option value="1">Administrador</option>
-                <option value="2">Asistente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Asistente</option>
             </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button class="btn btn-primary" type="submit">Guardar</button>
-         </div>
+          </div>
         </form>
       </div>
 
@@ -52,29 +52,29 @@
       </div>
       <div class="modal-body">
         <form id="updateUserForm" name="updateUserForm">
-        <input type="hidden" name="id" id="id" value="">
+          <input type="hidden" name="id" id="id" value="">
           <div class="form-group">
             <label for="label-control">Nombres y apellidos:</label>
-            <input type="text" class="form-control" name="nombreUpdate" id="nombreUpdate" >
+            <input type="text" class="form-control" name="nombreUpdate" id="nombreUpdate">
           </div>
           <div class="form-group">
             <label for="listRolUpdate">Rol:</label>
             <select class="form-control" name="listRolUpdate" id="listRolUpdate">
-                <option value="1">Administrador</option>
-                <option value="2">Asistente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Asistente</option>
             </select>
           </div>
           <div class="form-group">
             <label for="listEstadoUpdate">Estado:</label>
             <select class="form-control" name="listEstadoUpdate" id="listEstadoUpdate">
-                <option value="1">Activo</option>
-                <option value="0">Inactivo</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
             </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button class="btn btn-primary" type="submit">Actualizar</button>
-         </div>
+          </div>
         </form>
       </div>
 

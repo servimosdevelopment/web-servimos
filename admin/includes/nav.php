@@ -21,7 +21,7 @@ $rolText = ($rol == 1) ? "Administrador" : "Asistente";
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="lista_estudiantes.php"><i class="app-menu__icon icon fa fa-circle-o"></i><span class="app-menu__label">Personas</span></a></li>
+        <li><a class="app-menu__item" href="lista_personas.php"><i class="app-menu__icon icon fa fa-circle-o"></i><span class="app-menu__label">Personas</span></a></li>
         <li><a class="app-menu__item" href="listaprofesores.php"><i class="app-menu__icon icon fa fa-circle-o"></i><span class="app-menu__label">Contratos</span></a></li>
         <li><a class="app-menu__item" href="lista_asignaturas.php"><i class="app-menu__icon icon fa fa-circle-o"></i><span class="app-menu__label">Notificaciones</span></a></li>
         <li><a class="app-menu__item" href="lista_usuarios.php"><i class="app-menu__icon icon fa fa-circle-o"></i><span class="app-menu__label">Usuarios</span></a></li>

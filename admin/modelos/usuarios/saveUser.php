@@ -5,7 +5,7 @@ include_once("../../../includes/conexion.php");
 
 if (!empty($_POST)) {
     if ($_SESSION['rol'] != 1) {
-        $respuesta = array('status' => false, 'msg' => 'Usted no tiene permitido hacer esta acción'); 
+        $respuesta = array('status' => false, 'msg' => 'Usted no tiene permitido hacer esta acción');
     } else {
 
         $nombre = $_POST['nombre'];
@@ -15,12 +15,12 @@ if (!empty($_POST)) {
 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = 'SELECT * FROM usuarios WHERE email = ?'; 
+        $sql = 'SELECT * FROM usuarios WHERE email = ?';
         $query = $con->prepare($sql);
         $query->execute(array($email));
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($result) { 
+        if ($result) {
             $respuesta = array('status' => false, 'msg' => 'El Email ingresado esta asociado a otro usuario');
         } else {
             $sqlinsert = 'INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)';
@@ -35,4 +35,3 @@ if (!empty($_POST)) {
 
     echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
 }
-?>
