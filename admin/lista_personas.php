@@ -21,8 +21,9 @@ include_once("includes/modals/person_modals.php");
                         <table class="table table-hover table-bordered" id="person_table">
                             <thead>
                                 <tr>
+                                <th>Acciones</th>
                                 <th>ID</th>
-                                <th>Nombre</th>
+                                <th>Nombres y Apellidos</th>
                                 <th>Fecha de Nacimiento</th>
                                 <th>Edad</th>
                                 <th>Email</th>
