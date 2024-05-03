@@ -1,9 +1,11 @@
 //$('#person_table').DataTable();
-var person_table;
+let person_table;
 
 document.addEventListener('DOMContentLoaded', function () {
     var departamentoSelect = document.querySelector('#departamento_nacimiento');
     var municipioSelect = document.querySelector('#municipio_nacimiento');
+    var departamentoReSelect = document.querySelector('#departamento_residencia');
+    var municipioReSelect = document.querySelector('#municipio_residencia');
 
     person_table = $('#person_table').DataTable({
         "aProcessing": true,
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
             var departamentos = JSON.parse(request.responseText);
+            var departamentosRe = JSON.parse(request.responseText);
 
             // Llena el campo de selección de departamentos con los departamentos obtenidos
             departamentos.forEach(function (departamento) {
@@ -49,8 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 departamentoSelect.appendChild(option);
             });
 
+            departamentosRe.forEach(function (departamento) {
+                var option = document.createElement('option');
+                option.value = departamento.id_departamento;
+                option.textContent = departamento.departamento;
+                departamentoReSelect.appendChild(option);
+            });
+
+
             // Dispara manualmente el evento de cambio para cargar los municipios del departamento seleccionado
             departamentoSelect.dispatchEvent(new Event('change'));
+            departamentoReSelect.dispatchEvent(new Event('change'));
         }
     };
 
@@ -77,6 +89,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     option.value = municipio.id_municipio;
                     option.textContent = municipio.municipio;
                     municipioSelect.appendChild(option);
+                });
+            }
+        };
+    });
+
+    departamentoReSelect.addEventListener('change', function () {
+        var departamentoReId = this.value;
+
+        // Realiza una solicitud AJAX para obtener los municipios asociados con el departamento seleccionado
+        var request = new XMLHttpRequest();
+        var url = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(departamentoReId);
+        request.open('GET', url, true);
+        request.send();
+
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                var municipiosRe = JSON.parse(request.responseText);
+
+                // Limpia el campo de selección de municipios
+                municipioReSelect.innerHTML = '';
+
+                // Llena el campo de selección de municipios con los municipios obtenidos
+                municipiosRe.forEach(function (municipioRe) {
+                    var option = document.createElement('option');
+                    option.value = municipioRe.id_municipio;
+                    option.textContent = municipioRe.municipio;
+                    municipioReSelect.appendChild(option);
                 });
             }
         };
