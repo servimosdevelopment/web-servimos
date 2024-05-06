@@ -6,7 +6,7 @@ include_once("includes/modals/person_modals.php");
     <div class="app-title">
         <div>
             <h1><i class="fa fa-dashboard"></i> Listado Personas</h1>
-            <button type="button" class="badge btn-success" onclick="openModal()">Nuevo Persona</button>
+            <button type="button" class="badge btn-success" onclick="openModalPerson()">Nuevo Persona</button>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home fa-lg"></i></a></li>

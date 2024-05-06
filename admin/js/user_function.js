@@ -205,7 +205,7 @@ function deleteUser(id) {
     });
 }
 
-function openModal() {
+function openModalUser() {
     $("#userModal").modal('show');
 }
 

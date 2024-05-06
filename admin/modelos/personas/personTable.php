@@ -9,8 +9,8 @@ $consulta = $query->fetchAll(PDO::FETCH_ASSOC);
 for ($i = 0; $i < count($consulta); $i++) {
     $consulta[$i]['acciones'] = '
         <div class="btn-group" role="group">
-            <button class="btn btn-primary" title="Actualizar" onclick="readUserUpdate(' . $consulta[$i]['id'] . ')">Actualizar</button>
-            <button class="btn btn-danger" title="Eliminar" onclick="deleteUser(' . $consulta[$i]['id'] . ')">Eliminar</button>
+            <button class="btn btn-primary" title="Actualizar" onclick="readPersonUpdate(' . $consulta[$i]['id'] . ')">Actualizar</button>
+            <button class="btn btn-danger" title="Eliminar" onclick="deletePerson(' . $consulta[$i]['id'] . ')">Eliminar</button>
         </div>';
 }
 

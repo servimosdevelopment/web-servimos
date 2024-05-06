@@ -76,7 +76,7 @@
           </div>
           <div class="form-group">
             <label for="label-control">Estado civil:</label>
-            <select class="form-control" name="tipo_sangre" id="tipo_sangre">
+            <select class="form-control" name="estado_civil" id="estado_civil">
               <option value="Soltero/a">Soltero/a</option>
               <option value="Casado/a">Casado/a</option>
               <option value="Viudo/a">Viudo/a</option>
@@ -98,14 +98,14 @@
           <div class="form-group">
             <label for="label-control">Escolaridad:</label>
             <select class="form-control" name="id_escolaridad" id="id_escolaridad">
-              <option value="Sin escolaridad">Sin escolaridad</option>
-              <option value="Primaria incompleta">Primaria incompleta</option>
-              <option value="Primaria completa">Primaria completa</option>
-              <option value="Secundaria incompleta">Secundaria incompleta</option>
-              <option value="Secundaria completa">Secundaria completa</option>
-              <option value="Universidad incompleta">Universidad incompleta</option>
-              <option value="Univesidad completa">Univesidad completa</option>
-              <option value="Posgrado">Posgrado</option>
+              <option value="1">Sin escolaridad</option>
+              <option value="2">Primaria incompleta</option>
+              <option value="3">Primaria completa</option>
+              <option value="4">Secundaria incompleta</option>
+              <option value="5">Secundaria completa</option>
+              <option value="6">Universidad incompleta</option>
+              <option value="7">Universidad completa</option>
+              <option value="8">Posgrado</option>
             </select>
           </div>
           <div class="form-group">
