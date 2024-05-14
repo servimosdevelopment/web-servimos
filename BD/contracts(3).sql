@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-05-2024 a las 18:30:12
+-- Tiempo de generación: 14-05-2024 a las 13:00:39
 -- Versión del servidor: 8.0.36-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.15
 
@@ -44,15 +44,14 @@ CREATE TABLE `contacto_emergencia` (
 CREATE TABLE `contrato` (
   `id` int NOT NULL,
   `id_persona` int DEFAULT NULL COMMENT 'ID de la Persona asociada',
-  `empresa` varchar(255) DEFAULT NULL COMMENT 'Empresa que presta servicios',
   `cargo` varchar(100) DEFAULT NULL COMMENT 'Cargo que desempeña',
+  `empresa_id` int DEFAULT NULL,
   `eps` varchar(100) DEFAULT NULL COMMENT 'EPS del contratante',
   `pension` varchar(100) DEFAULT NULL COMMENT 'Lugar donde cotiza pensión',
   `estado_hv` varchar(100) DEFAULT NULL COMMENT 'Estado del HV',
   `fecha_inicio` date DEFAULT NULL COMMENT 'Fecha de inicio del contrato',
   `tipo` varchar(100) DEFAULT NULL COMMENT 'Tipo de contrato',
   `fecha_terminacion` date DEFAULT NULL COMMENT 'Fecha de terminación del contrato',
-  `vacaciones` date DEFAULT NULL COMMENT 'Próximas vacaciones',
   `activo` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Estado de activación del contrato (1: activo, 0: inactivo)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -105,6 +104,22 @@ INSERT INTO `departamentos` (`id_departamento`, `departamento`) VALUES
 (95, 'GUAVIARE'),
 (97, 'VAUPÉS'),
 (99, 'VICHADA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `id` int NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `nit` varchar(20) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `representante_legal` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -1300,6 +1315,7 @@ CREATE TABLE `persona` (
   `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nombres y apellidos completos de la persona',
   `sexo` enum('M','F') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Sexo de la persona',
   `fecha_nacimiento` date DEFAULT NULL COMMENT 'Fecha de nacimiento de la persona',
+  `fecha_expedicion_cedula` date DEFAULT NULL COMMENT 'Fecha de expedición de la cédula',
   `edad` int DEFAULT NULL COMMENT 'Edad de la persona',
   `departamento_nacimiento` int UNSIGNED DEFAULT NULL,
   `municipio_nacimiento` int UNSIGNED DEFAULT NULL,
@@ -1307,14 +1323,12 @@ CREATE TABLE `persona` (
   `municipio_residencia` int UNSIGNED DEFAULT NULL,
   `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Dirección de la persona',
   `barrio` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Barrio de residencia de la persona',
-  `fecha_expedicion_cedula` date DEFAULT NULL COMMENT 'Fecha de expedición de la cédula',
   `tipo_sangre` int DEFAULT NULL COMMENT 'ID del tipo de sangre de la persona',
   `estado_civil` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Estado civil de la persona',
   `id_estrato` int DEFAULT NULL COMMENT 'ID del estrato de la persona',
   `id_escolaridad` int DEFAULT NULL COMMENT 'ID de la escolaridad de la persona',
   `telefono` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Teléfono personal de contacto de la persona',
   `whatsapp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Número de WhatsApp de la persona',
-  `competencias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Título en competencias de la persona',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Correo electrónico activo de la persona',
   `activo` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Estado de activación de la persona (1: activo, 0: inactivo)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -1323,8 +1337,9 @@ CREATE TABLE `persona` (
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`id`, `cedula`, `nombre`, `sexo`, `fecha_nacimiento`, `edad`, `departamento_nacimiento`, `municipio_nacimiento`, `departamento_residencia`, `municipio_residencia`, `direccion`, `barrio`, `fecha_expedicion_cedula`, `tipo_sangre`, `estado_civil`, `id_estrato`, `id_escolaridad`, `telefono`, `whatsapp`, `competencias`, `email`, `activo`) VALUES
-(4, '2222', 'Juan reyes', 'M', '2014-05-01', 10, 91, 1097, 91, 1097, 'ffffffff', 'ffffffffff', '2017-05-10', 1, 's', 1, 5, '4444444', '999999', 'jjjjjjjj', 'jjjjjjjjjj', 1);
+INSERT INTO `persona` (`id`, `cedula`, `nombre`, `sexo`, `fecha_nacimiento`, `fecha_expedicion_cedula`, `edad`, `departamento_nacimiento`, `municipio_nacimiento`, `departamento_residencia`, `municipio_residencia`, `direccion`, `barrio`, `tipo_sangre`, `estado_civil`, `id_estrato`, `id_escolaridad`, `telefono`, `whatsapp`, `email`, `activo`) VALUES
+(4, '2222', 'Juan Reyes', 'M', '1997-05-21', '2017-05-10', 26, 70, 914, 70, 914, 'ffffffff', 'ffffffffff', 1, '1', 1, 5, '4444444', '999999', 'jreyesh@gmail.com', 1),
+(5, '111', 'Juan Reyes Herrera', 'M', '1999-04-26', '2017-05-17', 25, 91, 503, 91, 503, 'San Rafael', 'hahah', 1, '1', 1, 1, '3114030928', '3114030928', 'rhjuanfe26@gmail.com', 1);
 
 --
 -- Disparadores `persona`
@@ -1388,7 +1403,21 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `fecha_registro`, `activo`) VALUES
-(3, 'Juan Reyes Herrera', 'juan@gmail.com', '$2y$10$ZGLy/ltxci6rHuU3zPKikujBj3PVekUWeGjhNkKeEmBbck8Mf5Zju', '1', '2024-03-07 15:51:54', '1');
+(3, 'Juan Reyes', 'juan@gmail.com', '$2y$10$ZGLy/ltxci6rHuU3zPKikujBj3PVekUWeGjhNkKeEmBbck8Mf5Zju', '1', '2024-03-07 15:51:54', '1'),
+(14, 'Jesus Reyes', 'jesus@gmail.com', '$2y$10$tY7qwO0u191nA267xFfjguGI2at5e6vGR4GJhMAXuK4GXLd2XdfSS', '2', '2024-05-03 16:01:36', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vacaciones`
+--
+
+CREATE TABLE `vacaciones` (
+  `id` int NOT NULL,
+  `persona_id` int DEFAULT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Índices para tablas volcadas
@@ -1406,13 +1435,21 @@ ALTER TABLE `contacto_emergencia`
 --
 ALTER TABLE `contrato`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_persona` (`id_persona`);
+  ADD KEY `id_persona` (`id_persona`),
+  ADD KEY `fk_contrato_empresa` (`empresa_id`);
 
 --
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id_departamento`);
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nit` (`nit`);
 
 --
 -- Indices de la tabla `escolaridad`
@@ -1467,6 +1504,13 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indices de la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `persona_id` (`persona_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -1487,6 +1531,12 @@ ALTER TABLE `contrato`
 --
 ALTER TABLE `departamentos`
   MODIFY `id_departamento` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `escolaridad`
@@ -1516,7 +1566,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_sangre`
@@ -1528,7 +1578,13 @@ ALTER TABLE `tipo_sangre`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -1544,6 +1600,7 @@ ALTER TABLE `contacto_emergencia`
 -- Filtros para la tabla `contrato`
 --
 ALTER TABLE `contrato`
+  ADD CONSTRAINT `fk_contrato_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
   ADD CONSTRAINT `fk_contrato_persona` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id`);
 
 --
@@ -1569,6 +1626,12 @@ ALTER TABLE `persona`
   ADD CONSTRAINT `fk_persona_escolaridad` FOREIGN KEY (`id_escolaridad`) REFERENCES `escolaridad` (`id`),
   ADD CONSTRAINT `fk_persona_estrato` FOREIGN KEY (`id_estrato`) REFERENCES `estrato` (`id`),
   ADD CONSTRAINT `fk_persona_tipo_sangre` FOREIGN KEY (`tipo_sangre`) REFERENCES `tipo_sangre` (`id`);
+
+--
+-- Filtros para la tabla `vacaciones`
+--
+ALTER TABLE `vacaciones`
+  ADD CONSTRAINT `vacaciones_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
