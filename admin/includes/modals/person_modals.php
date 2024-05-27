@@ -75,6 +75,14 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="label-control">EPS:</label>
+            <input type="text" class="form-control" name="eps" id="eps">
+          </div>
+          <div class="form-group">
+            <label for="label-control">Fondo de Pensiones y de Cesantías:</label>
+            <input type="text" class="form-control" name="afp" id="afp">
+          </div>
+          <div class="form-group">
             <label for="label-control">Estado civil:</label>
             <select class="form-control" name="estado_civil" id="estado_civil">
               <option value="Soltero/a">Soltero/a</option>
@@ -109,16 +117,24 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="label-control">Hijos:</label>
+            <textarea class="form-control" name="hijos" id="hijos" placeholder="Nombre&#10;Tipo y número de documento"></textarea>
+          </div>
+          <div class="form-group">
             <label for="label-control">Teléfono:</label>
-            <input type="number" class="form-control" name="telefono" id="telefono">
+            <input type="text" class="form-control" name="telefono" id="telefono">
           </div>
           <div class="form-group">
             <label for="label-control">WhatsApp:</label>
-            <input type="number" class="form-control" name="whatsapp" id="whatsapp">
+            <input type="text" class="form-control" name="whatsapp" id="whatsapp">
           </div>
           <div class="form-group">
             <label for="label-control">Email</label>
             <input type="email" pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$" class="form-control" name="email" id="email">
+          </div>
+          <div class="form-group">
+            <label for="label-control">Contacto de Emergencia:</label>
+            <textarea class="form-control" name="contacto_emergencia" id="contacto_emergencia" placeholder="Nombre&#10;Numero de teléfono"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -136,7 +152,7 @@
   <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">Nueva persona</h5>
+        <h5 class="modal-title" id="modalTitle">Actualizar Persona</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -209,13 +225,21 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="label-control">EPS:</label>
+            <input type="text" class="form-control" name="epsUpdate" id="epsUpdate">
+          </div>
+          <div class="form-group">
+            <label for="label-control">Fondo de Pensiones y de Cesantías:</label>
+            <input type="text" class="form-control" name="afpUpdate" id="afpUpdate">
+          </div>
+          <div class="form-group">
             <label for="label-control">Estado civil:</label>
             <select class="form-control" name="estado_civilUpdate" id="estado_civilUpdate">
-              <option value="1">Soltero/a</option>
-              <option value="2">Casado/a</option>
-              <option value="3">Viudo/a</option>
-              <option value="4">Divorciado/a</option>
-              <option value="5">Union libre</option>
+              <option value="Soltero/a">Soltero/a</option>
+              <option value="Casado/a">Casado/a</option>
+              <option value="Viudo/a">Viudo/a</option>
+              <option value="Divorciado/a">Divorciado/a</option>
+              <option value="Union libre">Union libre</option>
             </select>
           </div>
           <div class="form-group">
@@ -243,20 +267,35 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="label-control">Hijos:</label>
+            <textarea class="form-control" name="hijosUpdate" id="hijosUpdate" placeholder="Nombre&#10;Tipo y número de documento"></textarea>
+          </div>
+          <div class="form-group">
             <label for="label-control">Teléfono:</label>
-            <input type="number" class="form-control" name="telefonoUpdate" id="telefonoUpdate">
+            <input type="text" class="form-control" name="telefonoUpdate" id="telefonoUpdate">
           </div>
           <div class="form-group">
             <label for="label-control">WhatsApp:</label>
-            <input type="number" class="form-control" name="whatsappUpdate" id="whatsappUpdate">
+            <input type="text" class="form-control" name="whatsappUpdate" id="whatsappUpdate">
           </div>
           <div class="form-group">
             <label for="label-control">Email</label>
             <input type="email" pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com)$" class="form-control" name="emailUpdate" id="emailUpdate">
           </div>
+          <div class="form-group">
+            <label for="label-control">Contacto de Emergencia:</label>
+            <textarea class="form-control" name="contacto_emergenciaUpdate" id="contacto_emergenciaUpdate" placeholder="Nombre&#10;Numero de teléfono"></textarea>
+          </div>
+          <div>
+            <label for="label-control">Estado:</label>
+            <select class="form-control" name="estado" id="estado">
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
           </div>
         </form>
       </div>

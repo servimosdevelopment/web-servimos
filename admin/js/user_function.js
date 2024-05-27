@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         return '<span class="badge rounded-pill bg-danger">Inactivo</span>';
                     }
                 }
-            }
+            },
         ],
         "responsive": true,
         "bDestroy": true,

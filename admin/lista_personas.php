@@ -24,11 +24,13 @@ include_once("includes/modals/person_modals.php");
                                 <th>Acciones</th>
                                 <th>ID</th>
                                 <th>Nombres y Apellidos</th>
+                                <th>Cedula</th>
                                 <th>Fecha de Nacimiento</th>
                                 <th>Edad</th>
                                 <th>Email</th>
                                 <th>Teléfono</th>
                                 <th>Dirección</th>
+                                <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,0 +1,67 @@
+
+.container-not {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.container-not-con {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.container-not-dot {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.next-bir {
+    margin-bottom: 20px;
+}
+
+#notifications{
+    margin-top: 20px;
+}
+
+#notificationsCon{
+    margin-top: 20px;
+}
+
+#notificationsDoc{
+    margin-top: 20px;
+}
+
+.notificacion {
+    background-color: #e7f3fe;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #b3d7ff;
+    border-radius: 5px;
+}
+
+.notificacion-hoy {
+    background-color: #ffeb3b;
+    border: 1px solid #ffd700;
+}
+
+.app-menu__item {
+    position: relative;
+}
+
+
+
+.notification-count {
+    background-color: red;
+    color: white;
+    border-radius: 70%;
+    padding: 2px 6px;
+    position: relative;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+}

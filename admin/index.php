@@ -21,7 +21,7 @@ $rolText = ($rol == 1) ? "Administrador" : "Asistente";
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          <p>Create your first dashboard</p>
+          <button class="btn btn-primary" id="exportExcel" onclick="openExport()">Exportar todos los datos en formato  Excel</button>
         </div>
       </div>
     </div>

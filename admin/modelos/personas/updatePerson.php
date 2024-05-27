@@ -17,19 +17,24 @@ try {
         $direccionUpdate = $_POST['direccionUpdate'];
         $barrioUpdate = $_POST['barrioUpdate'];
         $tipo_sangreUpdate = $_POST['tipo_sangreUpdate'];
+        $epsUpdate = $_POST['epsUpdate'];
+        $afpUpdate = $_POST['afpUpdate'];
         $estado_civilUpdate = $_POST['estado_civilUpdate'];
         $id_estratoUpdate = $_POST['id_estratoUpdate'];
         $id_escolaridadUpdate = $_POST['id_escolaridadUpdate'];
+        $hijosUpdate = $_POST['hijosUpdate'];
         $telefonoUpdate = $_POST['telefonoUpdate'];
         $whatsappUpdate = $_POST['whatsappUpdate'];
         $emailUpdate = $_POST['emailUpdate'];
+        $contacto_emergenciaUpdate = $_POST['contacto_emergenciaUpdate'];
+        $estado = $_POST['estado'];
 
-        $sql = 'SELECT * FROM persona WHERE cedula = ? or nombre = ?';
+        $sql = 'SELECT * FROM persona WHERE (cedula = ? or nombre = ?) AND id != ?';
         $query = $con->prepare($sql);
-        $query->execute(array($cedulaUpdate, $nombreUpdate));
+        $query->execute(array($cedulaUpdate, $nombreUpdate, $idUpdate));
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($result['id'] != $idUpdate) {
+        if ($result) {
             $respuesta = array('status' => false, 'msg' => 'La cedula ingresada o el nombre está asociado a otra persona');
         } else {
             $sqlUpdate = 'UPDATE persona SET
@@ -45,12 +50,17 @@ try {
                 direccion = ?,
                 barrio = ?,
                 tipo_sangre = ?,
+                eps = ?,
+                afp = ?,
                 estado_civil = ?,
                 id_estrato = ?,
                 id_escolaridad = ?,
+                hijos = ?,
                 telefono = ?,
                 whatsapp = ?,
-                email = ?
+                email = ?,
+                contacto_emergencia = ?,
+                activo = ?
                 WHERE id = ?';
             $queryUpdate = $con->prepare($sqlUpdate);
             $resultado = $queryUpdate->execute(array(
@@ -66,12 +76,17 @@ try {
                 $direccionUpdate,
                 $barrioUpdate,
                 $tipo_sangreUpdate,
+                $epsUpdate,
+                $afpUpdate,
                 $estado_civilUpdate,
                 $id_estratoUpdate,
                 $id_escolaridadUpdate,
+                $hijosUpdate,
                 $telefonoUpdate,
                 $whatsappUpdate,
                 $emailUpdate,
+                $contacto_emergenciaUpdate,
+                $estado,
                 $idUpdate
             ));
 

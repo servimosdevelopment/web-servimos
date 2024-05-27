@@ -25,11 +25,22 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "acciones" },
             { "data": "id" },
             { "data": "nombre" },
+            { "data": "cedula" },
             { "data": "fecha_nacimiento" },
             { "data": "edad" },
             { "data": "email" },
             { "data": "telefono" },
             { "data": "direccion" },
+            {
+                "data": "activo",
+                "render": function (data, type, row) {
+                    if (data == 1) {
+                        return '<span class="badge rounded-pill bg-success">Activo</span>';
+                    } else {
+                        return '<span class="badge rounded-pill bg-danger">Inactivo</span>';
+                    }
+                }
+            },
         ],
         "responsive": true,
         "bDestroy": true,
@@ -144,11 +155,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     departamentoSelectUpdate.addEventListener('change', function () {
-        var departamentoId = this.value;
+        var departamentoIdUpdate = this.value;
 
         // Realiza una solicitud AJAX para obtener los municipios asociados con el departamento seleccionado
         var request = new XMLHttpRequest();
-        var url = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(departamentoId);
+        var url = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(departamentoIdUpdate);
         request.open('GET', url, true);
         request.send();
 
@@ -160,10 +171,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 municipioSelectUpdate.innerHTML = '';
 
                 // Llena el campo de selección de municipios con los municipios obtenidos
-                municipiosUpdate.forEach(function (municipio) {
+                municipiosUpdate.forEach(function (municipiosUpdate) {
                     var option = document.createElement('option');
-                    option.value = municipio.id_municipio;
-                    option.textContent = municipio.municipio;
+                    option.value = municipiosUpdate.id_municipio;
+                    option.textContent = municipiosUpdate.municipio;
                     municipioSelectUpdate.appendChild(option);
                 });
             }
@@ -171,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     departamentoReSelectUpdate.addEventListener('change', function () {
-        var departamentoReId = this.value;
+        var departamentoReIdUpdate = this.value;
 
         // Realiza una solicitud AJAX para obtener los municipios asociados con el departamento seleccionado
         var request = new XMLHttpRequest();
-        var url = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(departamentoReId);
+        var url = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(departamentoReIdUpdate);
         request.open('GET', url, true);
         request.send();
 
@@ -187,10 +198,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 municipioReSelectUpdate.innerHTML = '';
 
                 // Llena el campo de selección de municipios con los municipios obtenidos
-                municipiosReUpdate.forEach(function (municipioRe) {
+                municipiosReUpdate.forEach(function (municipiosReUpdate) {
                     var option = document.createElement('option');
-                    option.value = municipioRe.id_municipio;
-                    option.textContent = municipioRe.municipio;
+                    option.value = municipiosReUpdate.id_municipio;
+                    option.textContent = municipiosReUpdate.municipio;
                     municipioReSelectUpdate.appendChild(option);
                 });
             }
@@ -207,6 +218,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var departamento_residencia = document.querySelector('#departamento_residencia').value;
         var municipio_residencia = document.querySelector('#municipio_residencia').value;
         var tipo_sangre = document.querySelector('#tipo_sangre').value;
+        var eps = document.querySelector('#eps').value
+        var afp = document.querySelector('#afp').value
         var estado_civil = document.querySelector('#estado_civil').value;
         var id_estrato = document.querySelector('#id_estrato').value;
         var id_escolaridad = document.querySelector('#id_escolaridad').value;
@@ -221,6 +234,8 @@ document.addEventListener('DOMContentLoaded', function () {
         form.append('departamento_residencia', departamento_residencia);
         form.append('municipio_residencia', municipio_residencia);
         form.append('tipo_sangre', tipo_sangre);
+        form.append('eps', eps);
+        form.append('afp', afp);
         form.append('estado_civil', estado_civil);
         form.append('id_estrato', id_estrato);
         form.append('id_escolaridad', id_escolaridad);
@@ -229,16 +244,16 @@ document.addEventListener('DOMContentLoaded', function () {
         request.onreadystatechange = function () {
             if (request.readyState === 4) {
                 if (request.status === 200) {
-                    var data = JSON.parse(request.responseText);
+                    var datas = JSON.parse(request.responseText);
                     try {
 
-                        if (data.status) {
+                        if (datas.status) {
                             $("#personModal").modal('hide');
                             personForm.reset();
-                            swal('Persona', data.msg, 'success');
+                            swal('Persona', datas.msg, 'success');
                             person_table.ajax.reload();
                         } else {
-                            swal('Error', data.msg, 'error');
+                            swal('Error', datas.msg, 'error');
                         }
                     } catch (error) {
                         console.error('Error al analizar la respuesta JSON:', error);
@@ -264,9 +279,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var departamento_residenciaUpdate = document.querySelector('#departamento_residenciaUpdate').value;
         var municipio_residenciaUpdate = document.querySelector('#municipio_residenciaUpdate').value;
         var tipo_sangreUpdate = document.querySelector('#tipo_sangreUpdate').value;
+        var epsUpdate = document.querySelector('#epsUpdate').value
+        var afpUpdate = document.querySelector('#afpUpdate').value
         var estado_civilUpdate = document.querySelector('#estado_civilUpdate').value;
         var id_estratoUpdate = document.querySelector('#id_estratoUpdate').value;
         var id_escolaridadUpdate = document.querySelector('#id_escolaridadUpdate').value;
+        var estado = document.querySelector('#estado').value;
 
 
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -278,9 +296,12 @@ document.addEventListener('DOMContentLoaded', function () {
         formUpdate.append('departamento_residenciaUpdate', departamento_residenciaUpdate);
         formUpdate.append('municipio_residenciaUpdate', municipio_residenciaUpdate);
         formUpdate.append('tipo_sangreUpdate', tipo_sangreUpdate);
+        formUpdate.append('epsUpdate', epsUpdate);
+        formUpdate.append('afpUpdate', afpUpdate);
         formUpdate.append('estado_civilUpdate', estado_civilUpdate);
         formUpdate.append('id_estratoUpdate', id_estratoUpdate);
         formUpdate.append('id_escolaridadUpdate', id_escolaridadUpdate);
+        formUpdate.append('estado', estado);
         request.open('POST', url, true);
         request.send(formUpdate);
         request.onreadystatechange = function () {
@@ -312,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 function readPersonUpdate(id) {
     var idPerson = id;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -321,8 +343,73 @@ function readPersonUpdate(id) {
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             var data = JSON.parse(request.responseText);
-            console.log(data);
 
+            // Selecciona los campos de selección de departamentos y municipios en el modal de actualización
+            var departamentoSelectUpdate = document.querySelector('#departamento_nacimientoUpdate');
+            var municipioSelectUpdate = document.querySelector('#municipio_nacimientoUpdate');
+            var departamentoReSelectUpdate = document.querySelector('#departamento_residenciaUpdate');
+            var municipioReSelectUpdate = document.querySelector('#municipio_residenciaUpdate');
+
+
+            // Almacena el ID del municipio seleccionado previamente
+            var municipioNacimientoPrevio = data.datos.municipio_nacimiento;
+            var municipioResidenciaPrevio = data.datos.municipio_residencia;
+
+            // Establece los valores seleccionados para los campos de selección de departamentos
+            departamentoSelectUpdate.value = data.datos.departamento_nacimiento;
+            departamentoReSelectUpdate.value = data.datos.departamento_residencia;
+
+            // Limpia los campos de selección de municipios
+            municipioSelectUpdate.innerHTML = '';
+            municipioReSelectUpdate.innerHTML = '';
+
+            // Realiza una solicitud AJAX para obtener los municipios asociados con el departamento de nacimiento seleccionado
+            var requestMunicipiosNacimiento = new XMLHttpRequest();
+            var urlMunicipiosNacimiento = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(data.datos.departamento_nacimiento);
+            requestMunicipiosNacimiento.open('GET', urlMunicipiosNacimiento, true);
+            requestMunicipiosNacimiento.send();
+
+            requestMunicipiosNacimiento.onreadystatechange = function () {
+                if (requestMunicipiosNacimiento.readyState === 4 && requestMunicipiosNacimiento.status === 200) {
+                    var municipiosUpdate = JSON.parse(requestMunicipiosNacimiento.responseText);
+
+                    // Llena el campo de selección de municipios de nacimiento con los municipios obtenidos
+                    municipiosUpdate.forEach(function (municipioUpdate) {
+                        var option = document.createElement('option');
+                        option.value = municipioUpdate.id_municipio;
+                        option.textContent = municipioUpdate.municipio;
+                        municipioSelectUpdate.appendChild(option);
+                    });
+
+                    // Restablece el municipio seleccionado previamente
+                    municipioSelectUpdate.value = municipioNacimientoPrevio;
+                }
+            };
+
+            // Realiza una solicitud AJAX para obtener los municipios asociados con el departamento de residencia seleccionado
+            var requestMunicipiosResidencia = new XMLHttpRequest();
+            var urlMunicipiosResidencia = './modelos/personas/get_municipios.php?departamento_id=' + encodeURIComponent(data.datos.departamento_residencia);
+            requestMunicipiosResidencia.open('GET', urlMunicipiosResidencia, true);
+            requestMunicipiosResidencia.send();
+
+            requestMunicipiosResidencia.onreadystatechange = function () {
+                if (requestMunicipiosResidencia.readyState === 4 && requestMunicipiosResidencia.status === 200) {
+                    var municipiosReUpdate = JSON.parse(requestMunicipiosResidencia.responseText);
+
+                    // Llena el campo de selección de municipios de residencia con los municipios obtenidos
+                    municipiosReUpdate.forEach(function (municipioReUpdate) {
+                        var option = document.createElement('option');
+                        option.value = municipioReUpdate.id_municipio;
+                        option.textContent = municipioReUpdate.municipio;
+                        municipioReSelectUpdate.appendChild(option);
+                    });
+
+                    // Restablece el municipio seleccionado previamente
+                    municipioReSelectUpdate.value = municipioResidenciaPrevio;
+                }
+            };
+
+            // Muestra el modal de actualización con los datos de la persona
             if (data.status) {
                 document.querySelector('#idUpdate').value = data.datos.id;
                 document.querySelector('#cedulaUpdate').value = data.datos.cedula;
@@ -330,27 +417,69 @@ function readPersonUpdate(id) {
                 document.querySelector('#sexoUpdate').value = data.datos.sexo;
                 document.querySelector('#fecha_nacimientoUpdate').value = data.datos.fecha_nacimiento;
                 document.querySelector('#fecha_expedicion_cedulaUpdate').value = data.datos.fecha_expedicion_cedula;
-                document.querySelector('#departamento_nacimientoUpdate').value = data.datos.departamento_nacimiento;
-                document.querySelector('#municipio_nacimientoUpdate').value = data.datos.municipio_nacimiento;
-                document.querySelector('#departamento_residenciaUpdate').value = data.datos.departamento_residencia;
-                document.querySelector('#municipio_residenciaUpdate').value = data.datos.municipio_residencia;
                 document.querySelector('#direccionUpdate').value = data.datos.direccion;
                 document.querySelector('#barrioUpdate').value = data.datos.barrio;
                 document.querySelector('#tipo_sangreUpdate').value = data.datos.tipo_sangre;
+                document.querySelector('#epsUpdate').value = data.datos.eps;
+                document.querySelector('#afpUpdate').value = data.datos.afp;
                 document.querySelector('#estado_civilUpdate').value = data.datos.estado_civil;
                 document.querySelector('#id_estratoUpdate').value = data.datos.id_estrato;
                 document.querySelector('#id_escolaridadUpdate').value = data.datos.id_escolaridad;
+                document.querySelector('#hijosUpdate').value = data.datos.hijos;
                 document.querySelector('#telefonoUpdate').value = data.datos.telefono;
                 document.querySelector('#whatsappUpdate').value = data.datos.whatsapp;
                 document.querySelector('#emailUpdate').value = data.datos.email;
+                document.querySelector('#contacto_emergenciaUpdate').value = data.datos.contacto_emergencia;
+                document.querySelector('#estado').value = data.datos.activo;
+
                 $('#personModalUpdate').modal('show');
-            }else {
+
+            } else {
                 console.log(data.msg)
             }
         }
     }
 }
 
+function deletePerson(id) {
+    var idUser = id;
+    swal({
+        title: "Eliminar",
+        text: "¿Desea Eliminar al registro seleccionado?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function (confirm) {
+
+        if (confirm) {
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            var url = './modelos/personas/deletePerson.php?id=' + encodeURIComponent(idUser);
+            request.open('POST', url, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send();
+            request.onreadystatechange = function () {
+                if (request.readyState == 4) {
+                    if (request.status == 200) {
+                        var data = JSON.parse(request.responseText);
+                        if (data.status) {
+                            swal('Registro', data.msg, 'success');
+                            person_table.ajax.reload();
+                        } else {
+                            swal('Error', data.msg, 'error');
+                        }
+                    } else {
+                        swal('Error', 'Error en la solicitud al servidor', 'error');
+                    }
+                }
+            }
+        }
+    });
+}
+
 function openModalPerson() {
     $('#personModal').modal('show');
 }
+
