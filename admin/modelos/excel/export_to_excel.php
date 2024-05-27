@@ -2,7 +2,7 @@
 include_once("../../../includes/conexion.php");
 
 $sql = "SELECT p.id AS persona_id, p.cedula, p.nombre AS persona_nombre, p.sexo, p.eps, p.afp AS fondo_pension,
-        p.fecha_nacimiento, p.fecha_expedicion_cedula, p.edad, p.direccion AS persona_direccion, 
+        p.fecha_nacimiento, p.fecha_expedicion_cedula, p.edad, p.direccion AS persona_direccion, p.hijos AS hijos, p.contacto_emergencia AS contacto_emergencia
         p.barrio AS persona_barrio, p.telefono AS persona_telefono, p.whatsapp AS persona_whatsapp, 
         p.email AS persona_email, p.activo AS persona_activo, c.id AS contrato_id, c.cargo AS contrato_cargo, 
         c.estado_hv AS contrato_estado_hv, CASE c.tipo WHEN '1' THEN 'Tipo 1' WHEN '0' THEN 'Tipo 0' END AS contrato_tipo, 
